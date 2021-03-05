@@ -222,6 +222,12 @@ void addFields(iris *p, int n, char filename[])
         perror("because: ");
         exit(1);
     }
+    // ghi de gia tri so field o dau file
+    rewind(fp);
+    int x;
+    fscanf(fp, "%d", &x);
+    x += n;
+    fprintf(fp, "%d", x);
     fseek(fp, -1, SEEK_END);
     for (int i = 0; i < n; i++)
     {
