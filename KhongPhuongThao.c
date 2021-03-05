@@ -223,15 +223,16 @@ void addFields(iris *p, int n, char filename[])
         exit(1);
     }
     // ghi de gia tri so field o dau file
-    rewind(fp);
+    //rewind(fp);
     int x;
     fscanf(fp, "%d", &x);
     x += n;
+    fseek(fp, 0, SEEK_SET);
     fprintf(fp, "%d", x);
-    fseek(fp, -1, SEEK_END);
+    fseek(fp, 0, SEEK_END);
     for (int i = 0; i < n; i++)
-    {
-        fprintf(fp, "\n%.1f,%.1f,%.1f,%.1f,%s", (p + i)->sepal_l, (p + i)->sepal_w, (p + i)->petal_l, (p + i)->petal_w, (p + i)->clss);
+    { 
+        fprintf(fp, "%.1f,%.1f,%.1f,%.1f,%s\n", (p + i)->sepal_l, (p + i)->sepal_w, (p + i)->petal_l, (p + i)->petal_w, (p + i)->clss);
     }
     fclose(fp);
     printf("\nYour data has just been successfully appended to %s file.\nPlease check it out for more!", filename);
@@ -248,10 +249,7 @@ void writeBin(iris *p, int n, char filename[], char nameBin[])
     }
     rewind(fo);
     fwrite(&n, sizeof(int), 1, fo);
-    for (int i = 0; i < n; i++)
-    {
-        fwrite(p + i, sizeof(iris), 1, fo);
-    }
+    fwrite(p, sizeof(iris), n, fo);
     fclose(fo);
     printf("\nSuccessfully writing your data to %s file.\nPlease check it out!", nameBin);
 }
@@ -262,3 +260,4 @@ void clearScr()
     fflush(stdin);
     system("cls");
 }
+
