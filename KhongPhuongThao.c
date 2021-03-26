@@ -1,6 +1,3 @@
-// Hoc vien: Khong Phuong Thao
-// Lop: Bao dam an toan thong tin 
-// Don vi: c155 - d1
 
 #include <stdio.h>
 #include <stdlib.h>
